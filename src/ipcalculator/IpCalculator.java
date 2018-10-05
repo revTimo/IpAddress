@@ -1,6 +1,7 @@
+package ipcalculator;
 public class IpCalculator {
 	// 指定したIPアドレスがプライベートであることを判定する関数 
-	static boolean isValidPrivateIpv4(String _ipAddress) {
+	public static boolean isValidPrivateIpv4(String _ipAddress) {
 		// whitespace 空白を削除
 		_ipAddress = _ipAddress.replaceAll("\\s", "");
 
@@ -42,21 +43,21 @@ public class IpCalculator {
 	}
 
 	// 指定したIPアドレスのネットワークアドレスを取得する関数 
-	static String fetchNetworkAddress (String _ipAddress, String _subnetMask) {
+	public static String fetchNetworkAddress (String _ipAddress, String _subnetMask) {
 		// IPアドレスとサブネットマスクの各数値の論理積
 		Long longNetworkValue = ipStringToLong(_ipAddress) & ipStringToLong(_subnetMask);
 		return longToipAddress(longNetworkValue);
 	}
 
 	// 指定したIPアドレスのブロードキャストアドレスを取得する関数 
-	private static String fetchBroadcastAddress (String _ipAddress, String _subnetMask) {
+	public static String fetchBroadcastAddress (String _ipAddress, String _subnetMask) {
 		// subnetMaskの各数値のビットを全て反転し、ネットワーク アドレスの各数値と論理和
 		Long longBroadcastValue = ipStringToLong(_ipAddress) | ~ipStringToLong(_subnetMask);
 		return longToipAddress(longBroadcastValue);
 	}
 
 	// 指定したIPアドレスが所属するネットワークで使用できる最大ホスト数を取得する関数 
-	private static int fetchMaxHostNum(String _ipAddress, String _subnetMask){
+	public static int fetchMaxHostNum(String _ipAddress, String _subnetMask){
 		int maxHostNum = 0;
 		String[] subnetArray = _subnetMask.split("\\.");
 		String subnetBinary = "";
@@ -76,7 +77,7 @@ public class IpCalculator {
 	}
 
 	// ロングIPに変更
-	private static long ipStringToLong (String _address) {
+	public static long ipStringToLong (String _address) {
 		/*
 		 * https://ja.wikipedia.org/wiki/IPアドレス
 		 * n x (256)^3 + n x (256)^2 + n x (256)^1 + n (256)^0
@@ -91,7 +92,7 @@ public class IpCalculator {
 	}
 
 	// ロング => String IP(x.x.x.x)
-	private static String longToipAddress (long _longResult) {
+	public static String longToipAddress (long _longResult) {
 		StringBuilder sb_ipAddress = new StringBuilder(15);
 		for (int i = 0; i < 4; i++) {
 			sb_ipAddress.insert(0, Long.toString(_longResult & 0xff));
