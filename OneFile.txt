@@ -1,2 +1,2 @@
 name : one file
-status : new => ediit
+status : new => ediiiit

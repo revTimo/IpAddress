@@ -1,2 +1,2 @@
-iname : one file
+iiname : one file
 status : new => edit
